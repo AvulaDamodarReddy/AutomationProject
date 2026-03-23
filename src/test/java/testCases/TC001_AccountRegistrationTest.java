@@ -13,7 +13,7 @@ public class TC001_AccountRegistrationTest extends BaseClass {
 	public void verify_account_registration()
 	{
 		logger.info("***** Starting TC001_AccountRegistrationTest  ****");
-		logger.debug("This is a debug log message");
+		//logger.debug("This is a debug log message");
 		try
 		{
 		HomePage hp=new HomePage(driver);
@@ -31,10 +31,11 @@ public class TC001_AccountRegistrationTest extends BaseClass {
 		regpage.setEmail(randomeString()+"@gmail.com");// randomly generated the email
 		regpage.setTelephone(randomeNumber());
 			
-        String password=randomAlphaNumeric();
-		
+		String password=randomAlphaNumeric();
+			
 		regpage.setPassword(password);
 		regpage.setConfirmPassword(password);
+		
 		
 		regpage.setPrivacyPolicy();
 		regpage.clickContinue();
@@ -42,19 +43,35 @@ public class TC001_AccountRegistrationTest extends BaseClass {
 		logger.info("Validating expected message..");
 		
 		String confmsg = regpage.getConfirmationMsg();
-		Assert.assertEquals(confmsg, "Your Account Has Been Created!", "Confirmation message mismatch");
-
-		logger.info("Test passed");
+		//Assert.assertEquals(confmsg, "Your Account Has Been Created!", "Confirmation message mismatch");
+        if(confmsg.equals("Your Account Has Been Created!"))
+        {
+        	Assert.assertTrue(true);
+        }
+        else
+        {
+        	logger.error("Test failed ...");
+        	logger.debug("Debug logs..");
+        	Assert.assertTrue(false);
+        }
+	//	logger.info("Test passed");
+     // Assert.assertEquals(confmsg, "Your Account Has Been Created!", "Confirmation message mismatch");
 		} 
 		catch (Exception e)
 		{
-			logger.error("Test failed: " + e.getMessage());
-			Assert.fail("Test failed: " + e.getMessage());
+			//logger.error("Test failed: " + e.getMessage());
+			//Assert.fail("Test failed: " + e.getMessage());
+			Assert.fail();
 		} 
-		finally 
-		{
+	
+		
 		logger.info("***** Finished TC001_AccountRegistrationTest *****");
-		}
+		
+		
+//		finally 
+//		{
+//		logger.info("***** Finished TC001_AccountRegistrationTest *****");
+//		}
 	
 	}
 	
@@ -62,3 +79,18 @@ public class TC001_AccountRegistrationTest extends BaseClass {
 	
 	
 }
+
+		
+		
+	
+	
+	
+
+
+
+
+
+
+
+
+
